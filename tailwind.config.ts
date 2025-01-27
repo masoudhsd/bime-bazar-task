@@ -12,6 +12,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        yellow: "#FFC453",
       },
       fontFamily: {
         sans: ["var(--font-vazirmatn)", ...fontFamily.sans],
