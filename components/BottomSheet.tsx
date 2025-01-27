@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, ReactNode } from "react";
+import Portal from "./Portal";
 
 interface BottomSheetProps {
   paramKey?: string;
@@ -13,7 +14,7 @@ interface BottomSheetProps {
 export default function BottomSheet({
   paramKey = "bs",
   paramValue = "open",
-  height = "250px",
+
   children,
 }: BottomSheetProps) {
   const router = useRouter();
@@ -32,47 +33,48 @@ export default function BottomSheet({
   };
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        pointerEvents: isOpen ? "auto" : "none",
-        width: 460,
-        margin: "auto",
-      }}
-    >
-      {/* Backdrop (full-screen overlay) */}
+    <Portal>
       <div
-        onClick={close}
         style={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          transition: "opacity 0.3s ease-in-out",
-          opacity: isOpen ? 1 : 0,
-        }}
-      />
-
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height,
-          backgroundColor: "#fff",
-          boxShadow: "0 -2px 8px rgba(0,0,0,0.15)",
-          transition: "transform 0.3s ease-in-out",
-          transform: isOpen ? "translateY(0)" : "translateY(100%)",
-          zIndex: 1,
+          zIndex: 9999,
+          pointerEvents: isOpen ? "auto" : "none",
+          width: 460,
+          margin: "auto",
         }}
       >
-        <div style={{ textAlign: "right", padding: "1rem" }}>
-          <button onClick={close}>Close</button>
+        {/* Backdrop (full-screen overlay) */}
+        <div
+          onClick={close}
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            transition: "opacity 0.3s ease-in-out",
+            opacity: isOpen ? 1 : 0,
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#fff",
+            boxShadow: "0 -2px 8px rgba(0,0,0,0.15)",
+            transition: "transform 0.3s ease-in-out",
+            transform: isOpen ? "translateY(0)" : "translateY(100%)",
+            zIndex: 1,
+          }}
+        >
+          <div style={{ textAlign: "right", padding: "1rem" }}>
+            <button onClick={close}>Close</button>
+          </div>
+          <div style={{ padding: "1rem" }}>{children}</div>
         </div>
-        <div style={{ padding: "1rem" }}>{children}</div>
       </div>
-    </div>
+    </Portal>
   );
 }

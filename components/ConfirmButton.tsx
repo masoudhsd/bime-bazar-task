@@ -16,8 +16,11 @@ export default function ConfirmButton({
 }: ButtonProps) {
   return (
     <div className={`${classes}`}>
-      <button className={`bg-${bgColor}  p-4 font-semibold `} onClick={onClick}>
-        <p className={`text-${textColor}`}>{text}</p>
+      <button
+        className={`${bgColor} p-4 font-semibold w-full`}
+        onClick={onClick}
+      >
+        <p className={`${textColor}`}>{text}</p>
       </button>
     </div>
   );

@@ -23,6 +23,7 @@ export default function RootLayout({
         className={`${vazirmatn.variable} font-sans antialiased bg-gray-100`}
       >
         {children}
+        <div id="portal-root" />
       </body>
     </html>
   );

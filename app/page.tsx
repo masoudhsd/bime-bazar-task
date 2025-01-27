@@ -1,11 +1,21 @@
 "use client";
 
-import BottomSheetExample from "@/components/BottomSheet";
 import ConfirmButton from "@/components/ConfirmButton";
 import Header from "@/components/Header";
 import LicensePlate from "@/components/LicensePlate";
-
+import { BASE_URL } from "@/constants/urls";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const DynamicBottomSheet = dynamic(() => import("@/components/BottomSheet"));
+const DynamicAdresses = dynamic(() => import("@/components/Adresses"));
+
+interface Address {
+  id: string;
+  name: string;
+  details: string;
+}
 
 export default function Home() {
   const router = useRouter();
@@ -13,6 +23,33 @@ export default function Home() {
   const openSheet = () => {
     router.push("?bs=open", { scroll: false });
   };
+
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [selectedAddress, setSelectedAddress] = useState<Address>(null);
+  const [deletedAddress, setDeleteAddress] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(BASE_URL + "/my-addresses/");
+        if (!response.ok) {
+          throw new Error("Failed to fetch addresses.");
+        }
+        const data = await response.json();
+        setAddresses(data);
+      } catch (err: any) {
+        setError(err.message || "An error occurred.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAddresses();
+  }, []);
 
   return (
     <div
@@ -76,10 +113,28 @@ export default function Home() {
           classes="my-4 mr-auto"
         />
       </div>
-      <BottomSheetExample>
-        <h3>Reusable Bottom Sheet</h3>
-        <p>This content can be anything you like!</p>
-      </BottomSheetExample>
+      <DynamicBottomSheet>
+        <DynamicAdresses
+          addresses={addresses}
+          selectedAddress={selectedAddress}
+          setAddresses={setAddresses}
+          setSelectedAddress={setSelectedAddress}
+          setDeleteAddress={setDeleteAddress}
+          deletedAddress={deletedAddress}
+        />
+        {!deletedAddress ? (
+          <button
+            className={`${
+              selectedAddress
+                ? "bg-black text-white"
+                : "bg-gray-200 text-gray-500"
+            } p-4 font-semibold w-full mt-4`}
+            onClick={openSheet}
+          >
+            انتخاب
+          </button>
+        ) : null}
+      </DynamicBottomSheet>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start"></main>
     </div>
   );
