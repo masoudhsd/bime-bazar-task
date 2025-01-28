@@ -2,24 +2,24 @@
 import React, {
   memo,
   useEffect,
-  useReducer,
   ChangeEvent,
   useCallback,
   useMemo,
 } from "react";
 
-import BottomSheetsOfHome from "@/components/BottomSheetsOfHome";
+import BottomSheetsOfHome from "@/components/UI/BottomSheets/BottomSheetsOfHome";
 import ConfirmButton from "@/components/ConfirmButton";
-import Header from "@/components/Header";
-import InsuranceDetails from "@/components/InsuranceDetails";
-import LicensePlate from "@/components/LicensePlate";
+import Header from "@/components/UI/Header";
+import InsuranceDetails from "@/components/UI/InsuranceDetails";
+import LicensePlate from "@/components/UI/LicensePlate";
 import { BASE_URL } from "@/constants/urls";
-import useFormReducer from "@/hooks/useFormReducer";
 import useQueryParams from "@/hooks/useQueryParams";
 
+// 1) import your global state hook
+import { useGlobalState } from "@/context/GlobalStateProvider";
+
 function Home() {
-  const { initialState, inputReducer } = useFormReducer();
-  const [state, dispatch] = useReducer(inputReducer, initialState);
+  const { state, dispatch } = useGlobalState();
 
   const {
     nationalCode,
@@ -62,7 +62,7 @@ function Home() {
       }
     };
     fetchAddresses();
-  }, []);
+  }, [dispatch]);
 
   const openSheet = useCallback(
     (param: string, value: string) => {
@@ -95,9 +95,7 @@ function Home() {
       if (err instanceof Error) {
         openSheet("order-submit-error", "open");
         dispatch({ type: "IS_SUBMIT_ORDER_LOADING", payload: false });
-        console.error(err.message || "An error occurred.");
-      } else {
-        console.error(String(err));
+        console.log(String(err));
       }
     } finally {
       dispatch({ type: "IS_SUBMIT_ORDER_LOADING", payload: false });
@@ -150,11 +148,12 @@ function Home() {
 
       <div className="flex flex-col w-full px-4">
         <input
-          type="text"
+          type="tel"
           placeholder="کد ملی"
           className={`border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium ${
             nationalCodeError ? "border-red-600" : ""
           }`}
+          style={{ direction: "rtl" }}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             dispatch({ type: "SET_NATIONAL_CODE", payload: e.target.value })
           }
@@ -165,11 +164,12 @@ function Home() {
         )}
 
         <input
-          type="text"
+          type="tel"
           placeholder="شماره تلفن همراه"
           className={`border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium ${
             phoneNumberError ? "border-red-600" : ""
           }`}
+          style={{ direction: "rtl" }}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             dispatch({ type: "SET_PHONE_NUMBER", payload: e.target.value })
           }
@@ -207,7 +207,6 @@ function Home() {
           onClick={handleConfirmForm}
           textColor={isAllowedToSubmit ? "text-white" : "text-[#DAD8D8]"}
           bgColor={isAllowedToSubmit ? "bg-black" : "bg-gray-400"}
-          isLoading={isSubmitOrderLoading}
           classes="my-4"
         />
       </div>

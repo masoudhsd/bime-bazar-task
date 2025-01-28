@@ -11,7 +11,7 @@ interface AddressesProps {
   dispatch: React.Dispatch<Action>;
 }
 
-function Addresses({
+function AddressesBottomSheet({
   addresses,
   selectedAddress,
   dispatch,
@@ -21,40 +21,48 @@ function Addresses({
     dispatch({ type: "SET_DELETED_ADDRESS", payload: address });
     openDeleteAddressSheet();
   }
+
+  function handleCloseSheet(address: Address) {
+    dispatch({
+      type: "SET_SELECTED_ADDRESS",
+      payload: address,
+    });
+    dispatch({
+      type: "RESET_ADDRESS_ERROR",
+    });
+  }
   return (
     <>
       {addresses.map((address) => (
-        <div key={address?.id} className="w-full flex flex-col justify-center">
+        <div
+          key={address?.id}
+          className="w-full flex flex-col justify-center my-6"
+        >
           <div className="flex justify-end">
             <Image
               aria-hidden
               src="/delete.svg"
               alt="delete icon"
-              width={16}
-              height={16}
+              width={10}
+              height={10}
               onClick={() => handleClick(address)}
               className="mr-auto cursor-pointer"
             />
-            <p className="text-sm mx-2">{address?.name}</p>
+            <p className="text-sm mx-2 font-semibold">{address?.name}</p>
             <input
               type="radio"
               name="address"
-              onChange={() =>
-                dispatch({
-                  type: "SET_SELECTED_ADDRESS",
-                  payload: address,
-                })
-              }
+              onChange={() => handleCloseSheet(address)}
               value={address?.id}
               checked={selectedAddress?.id === address?.id}
               className="cursor-pointer"
             />
           </div>
-          <p className="text-xs text-end">{address?.details}</p>
+          <p className="text-xs text-end mt-2">{address?.details}</p>
         </div>
       ))}
     </>
   );
 }
 
-export default React.memo(Addresses);
+export default React.memo(AddressesBottomSheet);

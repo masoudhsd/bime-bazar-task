@@ -4,11 +4,13 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Portal from "./Portal";
 import { BottomSheetProps } from "@/constants/types";
+import Image from "next/image";
 
 export default function BottomSheet({
   paramKey = "bs",
   paramValue = "open",
   children,
+  title,
   onClose = () => {},
 }: BottomSheetProps) {
   const searchParams = useSearchParams();
@@ -18,10 +20,6 @@ export default function BottomSheet({
     const currentParamValue = searchParams.get(paramKey);
     setIsOpen(currentParamValue === paramValue);
   }, [paramKey, paramValue, searchParams]);
-
-  const close = () => {
-    onClose();
-  };
 
   return (
     <Portal>
@@ -38,7 +36,7 @@ export default function BottomSheet({
       >
         {/* Backdrop */}
         <div
-          onClick={close}
+          onClick={onClose}
           style={{
             position: "absolute",
             inset: 0,
@@ -61,9 +59,21 @@ export default function BottomSheet({
             zIndex: 1,
           }}
         >
-          <div style={{ textAlign: "right", padding: "1rem" }}>
-            <button onClick={close}>Close</button>
-          </div>
+          {title ? (
+            <div className="flex justify-between items-center p-4 border-b-[1px] border-gray-200">
+              <Image
+                aria-hidden
+                src="/close.svg"
+                alt="close icon"
+                width={14}
+                height={14}
+                onClick={onClose}
+                className="cursor-pointer"
+              />
+
+              <p className="font-semibold">{title}</p>
+            </div>
+          ) : null}
           <div style={{ padding: "1rem" }}>{children}</div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
+import { GlobalStateProvider } from "@/context/GlobalStateProvider";
 
 const vazirmatn = Vazirmatn({
   subsets: ["latin", "arabic"],
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${vazirmatn.variable} font-sans antialiased bg-gray-100`}
       >
-        {children}
+        <GlobalStateProvider>{children}</GlobalStateProvider>
         <div id="portal-root" />
       </body>
     </html>

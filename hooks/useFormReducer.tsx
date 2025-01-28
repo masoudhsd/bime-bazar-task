@@ -78,7 +78,7 @@ function useFormReducer() {
       }
 
       case "VALIDATE_PHONE_NUMBER": {
-        const phonePattern = /^09\d{9}$/;
+        const phonePattern = /^(09\d{9}|9\d{9})$/;
 
         if (state.phoneNumber.trim().length === 0) {
           return {
@@ -94,7 +94,10 @@ function useFormReducer() {
           };
         }
 
-        return { ...state, phoneNumberError: "" };
+        return {
+          ...state,
+          phoneNumberError: "",
+        };
       }
       case "VALIDATE_ADDRESS": {
         if (state.selectedAddress === null) {
@@ -142,6 +145,12 @@ function useFormReducer() {
         return {
           ...state,
           selectedAddress: null,
+        };
+      }
+      case "RESET_ADDRESS_ERROR": {
+        return {
+          ...state,
+          addressError: false,
         };
       }
       case "RESET_ERRORS": {

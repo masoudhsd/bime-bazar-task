@@ -17,12 +17,14 @@ export type Action =
   | { type: "SET_DELETED_ADDRESS"; payload: Address | null }
   | { type: "IS_SUBMIT_ORDER_LOADING"; payload: boolean }
   | { type: "RESET_ADDRESS" }
-  | { type: "RESET_ERRORS" };
+  | { type: "RESET_ERRORS" }
+  | { type: "RESET_ADDRESS_ERROR" };
 
 export interface BottomSheetProps {
   paramKey?: string;
   paramValue?: string;
   children: ReactNode;
+  title?: string;
   onClose?: () => void;
 }
 

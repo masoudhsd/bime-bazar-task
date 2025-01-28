@@ -2,14 +2,16 @@
 
 import React, { memo, useCallback } from "react";
 import dynamic from "next/dynamic";
-import ConfirmButton from "./ConfirmButton";
+import ConfirmButton from "../../ConfirmButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DeletedAddressBottomSheet from "./DeletedAddressBottomSheet";
 import { BottomSheetsOfHomeProps } from "@/constants/types";
 
 const DynamicBottomSheet = dynamic(() => import("@/components/BottomSheet"));
-const DynamicAdresses = dynamic(() => import("@/components/Adresses"));
+const DynamicAdresses = dynamic(
+  () => import("@/components/UI/BottomSheets/AdressesBottomSheet")
+);
 
 function BottomSheetsOfHome({
   addresses,
@@ -38,7 +40,8 @@ function BottomSheetsOfHome({
 
   const handleSheet1Close = useCallback(() => {
     router.push("/");
-  }, [router]);
+    dispatch({ type: "SET_SELECTED_ADDRESS", payload: null });
+  }, [dispatch, router]);
 
   const handleSheet2Close = useCallback(() => {
     setQueryParam("bs2");
@@ -48,6 +51,11 @@ function BottomSheetsOfHome({
     router.back();
   }, [router]);
 
+  const handleClickChooseAddress = useCallback(() => {
+    if (!selectedAddress) return;
+    router.push("/");
+  }, [router, selectedAddress]);
+
   return (
     <div>
       {/* Bottom Sheet #1 */}
@@ -55,6 +63,7 @@ function BottomSheetsOfHome({
         onClose={handleSheet1Close}
         paramKey="bs1"
         paramValue="open"
+        title="انتخاب آدرس"
       >
         <DynamicAdresses
           addresses={addresses}
@@ -69,7 +78,7 @@ function BottomSheetsOfHome({
               ? "bg-black text-white"
               : "bg-gray-200 text-gray-500"
           } p-4 font-semibold w-full mt-4`}
-          onClick={() => router.back()}
+          onClick={handleClickChooseAddress}
         >
           انتخاب
         </button>
@@ -80,6 +89,7 @@ function BottomSheetsOfHome({
         onClose={handleCloseDeleteSheet}
         paramKey="bs2"
         paramValue="open"
+        title="حذف آدرس"
       >
         <DeletedAddressBottomSheet
           deletedAddress={deletedAddress}
@@ -116,6 +126,7 @@ function BottomSheetsOfHome({
           />
         </div>
       </DynamicBottomSheet>
+      <button onClick={() => router.push("/success")}>ss</button>
     </div>
   );
 }

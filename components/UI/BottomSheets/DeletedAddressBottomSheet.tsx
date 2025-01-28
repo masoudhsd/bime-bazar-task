@@ -1,5 +1,5 @@
 import React from "react";
-import ConfirmButton from "./ConfirmButton";
+import ConfirmButton from "../../ConfirmButton";
 import { DeletedAddressBottomSheetProps } from "@/constants/types";
 
 function DeletedAddressBottomSheet({
@@ -9,6 +9,17 @@ function DeletedAddressBottomSheet({
   addresses,
   onClose,
 }: DeletedAddressBottomSheetProps) {
+  function handleDelete() {
+    if (selectedAddress?.id === deletedAddress?.id) {
+      dispatch({ type: "SET_SELECTED_ADDRESS", payload: null });
+    }
+
+    dispatch({
+      type: "SET_ADDRESSES",
+      payload: addresses.filter((addr) => addr?.id !== deletedAddress?.id),
+    });
+    onClose();
+  }
   return (
     <div>
       <p className="font-semibold text-end my-2">
@@ -33,20 +44,7 @@ function DeletedAddressBottomSheet({
         />
         <ConfirmButton
           text="تایید"
-          onClick={() => {
-            // If the deleted address was also selected, reset the selection
-            if (selectedAddress?.id === deletedAddress?.id) {
-              dispatch({ type: "SET_SELECTED_ADDRESS", payload: null });
-            }
-            // Filter out the deleted address and update the array
-            dispatch({
-              type: "SET_ADDRESSES",
-              payload: addresses.filter(
-                (addr) => addr?.id !== deletedAddress?.id
-              ),
-            });
-            onClose();
-          }}
+          onClick={handleDelete}
           textColor="text-white"
           bgColor="bg-black"
           isLoading={false}
