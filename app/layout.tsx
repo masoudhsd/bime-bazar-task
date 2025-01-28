@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${vazirmatn.variable} font-sans antialiased bg-gray-100`}
+        className={`${vazirmatn.variable} font-sans antialiased bg-gray-100 main_layout`}
       >
         {children}
         <div id="portal-root" />

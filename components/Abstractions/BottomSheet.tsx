@@ -30,8 +30,6 @@ export default function BottomSheet({
           inset: 0,
           zIndex: 9999,
           pointerEvents: isOpen ? "auto" : "none",
-          width: "100%",
-          maxWidth: 460,
           margin: "0 auto",
         }}
       >

@@ -93,7 +93,7 @@ function InsuranceDetailsPage() {
   ]);
 
   return (
-    <div className="items-center justify-items-center min-h-screen mx-auto bg-white">
+    <div className="items-center justify-items-center min-h-screen mx-auto bg-white max-w-[460px]">
       <Header title="مشخصات بیمه نامه" />
       <LicensePlate />
       <InsuranceDetails />

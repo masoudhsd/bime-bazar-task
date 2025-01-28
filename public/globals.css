@@ -29,8 +29,3 @@ input[type="number"] {
   box-sizing: border-box;
   direction: rtl;
 }
-
-body {
-  width: 460;
-  margin: auto;
-}

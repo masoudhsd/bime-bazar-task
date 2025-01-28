@@ -13,7 +13,7 @@ function Success() {
     router.back();
   }
   return (
-    <div className="flex flex-col items-center justify-center h-[100vh] bg-white">
+    <div className="flex flex-col items-center justify-center bg-white">
       <Header title="مشخصات بیمه نامه" />;
       <Image
         aria-hidden
