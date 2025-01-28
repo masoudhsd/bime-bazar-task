@@ -1,10 +1,8 @@
-"use client";
-
 import Image from "next/image";
 
-function LicensePlate() {
+const LicensePlate: React.FC = () => {
   return (
-    <div className="px-8 w-full">
+    <div className="px-12 w-full">
       <div className="border-2 border-black flex items-center font-bold text-lg h-[50px] w-full">
         <div className="border-l-2 border-black flex items-center p-2.5">
           60
@@ -12,7 +10,7 @@ function LicensePlate() {
 
         <div className="flex mr-auto">
           <p>65</p>
-          <p className="mx-8">k</p>
+          <p className="mx-8">ک</p>
           <p>9909</p>
         </div>
         <div className="border-r-2 border-black flex-col bg-[#1D48E1] h-full px-4 mr-auto">
@@ -22,13 +20,20 @@ function LicensePlate() {
             alt="flag"
             width={30}
             height={20}
-            className="mt-1"
+            className="mt-2"
+            priority
+            quality={100}
           />
-          <p className="font-extrabold text-white ml-auto">I.R.</p>
+          <p
+            className="font-extrabold text-white ml-auto"
+            style={{ direction: "ltr" }}
+          >
+            I.R.
+          </p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default LicensePlate;

@@ -1,1 +1,1 @@
-export const BASE_URL = "https://front-end-task.bmbzr.ir";
+export const BASE_URL: string = "https://front-end-task.bmbzr.ir";

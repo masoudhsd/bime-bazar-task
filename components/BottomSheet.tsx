@@ -1,35 +1,26 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState, ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Portal from "./Portal";
-
-interface BottomSheetProps {
-  paramKey?: string;
-  paramValue?: string;
-  height?: string;
-  children: ReactNode;
-}
+import { BottomSheetProps } from "@/constants/types";
 
 export default function BottomSheet({
   paramKey = "bs",
   paramValue = "open",
-
   children,
+  onClose = () => {},
 }: BottomSheetProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Sync the local "isOpen" state with the URL param
   useEffect(() => {
     const currentParamValue = searchParams.get(paramKey);
     setIsOpen(currentParamValue === paramValue);
   }, [paramKey, paramValue, searchParams]);
 
-  // Closes the bottom sheet (removing the query param)
   const close = () => {
-    router.back();
+    onClose();
   };
 
   return (
@@ -40,11 +31,12 @@ export default function BottomSheet({
           inset: 0,
           zIndex: 9999,
           pointerEvents: isOpen ? "auto" : "none",
-          width: 460,
-          margin: "auto",
+          width: "100%",
+          maxWidth: 460,
+          margin: "0 auto",
         }}
       >
-        {/* Backdrop (full-screen overlay) */}
+        {/* Backdrop */}
         <div
           onClick={close}
           style={{

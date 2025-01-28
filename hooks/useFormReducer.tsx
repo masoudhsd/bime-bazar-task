@@ -1,27 +1,24 @@
+import { Action, HomePageFormState } from "@/constants/types";
 import isValidIranianNationalCode from "@/helpers/isValidIranianNationalCode";
 import { Reducer } from "react";
-type State = {
-  nationalCode: string;
-  nationalCodeError: string;
-  phoneNumber: string;
-  phoneNumberError: string;
-};
-type Action =
-  | { type: "SET_NATIONAL_CODE"; payload: string }
-  | { type: "SET_PHONE_NUMBER"; payload: string }
-  | { type: "VALIDATE_NATIONAL_CODE" }
-  | { type: "VALIDATE_PHONE_NUMBER" }
-  | { type: "RESET_ERRORS" };
 
-const initialState: State = {
+const initialState: HomePageFormState = {
   nationalCode: "",
   nationalCodeError: "",
   phoneNumber: "",
   phoneNumberError: "",
+  addresses: [],
+  selectedAddress: null,
+  deletedAddress: null,
+  submitError: "",
+  submitMessage: "",
+  submitLoading: false,
+  addressError: false,
+  isSubmitOrderLoading: false,
 };
 
 function useFormReducer() {
-  const inputReducer: Reducer<State, Action> = (state, action) => {
+  const inputReducer: Reducer<HomePageFormState, Action> = (state, action) => {
     switch (action.type) {
       case "SET_NATIONAL_CODE": {
         const value = action.payload;
@@ -99,7 +96,54 @@ function useFormReducer() {
 
         return { ...state, phoneNumberError: "" };
       }
+      case "VALIDATE_ADDRESS": {
+        if (state.selectedAddress === null) {
+          return {
+            ...state,
+            addressError: true,
+          };
+        }
 
+        return {
+          ...state,
+          addressError: false,
+        };
+      }
+
+      case "SET_ADDRESSES": {
+        return {
+          ...state,
+          addresses: action.payload,
+        };
+      }
+
+      case "SET_SELECTED_ADDRESS": {
+        return {
+          ...state,
+          selectedAddress: action.payload,
+        };
+      }
+
+      case "SET_DELETED_ADDRESS": {
+        return {
+          ...state,
+          deletedAddress: action.payload,
+        };
+      }
+
+      case "IS_SUBMIT_ORDER_LOADING": {
+        return {
+          ...state,
+          isSubmitOrderLoading: action.payload,
+        };
+      }
+
+      case "RESET_ADDRESS": {
+        return {
+          ...state,
+          selectedAddress: null,
+        };
+      }
       case "RESET_ERRORS": {
         return {
           ...state,
