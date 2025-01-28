@@ -1,9 +1,9 @@
 "use client";
 
-import ConfirmButton from "@/components/Abstractions/ConfirmButton";
-import Header from "@/components/UI/Header";
-import InsuranceDetails from "@/app/insurance-details/components/UI/InsuranceDetails";
-import LicensePlate from "@/components/UI/LicensePlate";
+import ConfirmButton from "@/components/abstractions/ConfirmButton";
+import Header from "@/components/ui/Header";
+import InsuranceDetails from "@/app/insurance-details/components/ui/InsuranceDetails";
+import LicensePlate from "@/components/ui/LicensePlate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +17,7 @@ function Success() {
       <Header title="مشخصات بیمه نامه" />;
       <Image
         aria-hidden
-        src="/successFormSubmition.png"
+        src="/images/successFormSubmition.png"
         alt="delete icon"
         width={60}
         height={60}

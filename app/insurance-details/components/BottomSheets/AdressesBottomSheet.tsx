@@ -41,7 +41,7 @@ function AddressesBottomSheet({
           <div className="flex justify-center flex-row-reverse">
             <Image
               aria-hidden
-              src="/delete.svg"
+              src="/images/delete.svg"
               alt="delete icon"
               width={10}
               height={10}

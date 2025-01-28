@@ -13,7 +13,7 @@ function Header({ title }: HeaderProps) {
       <div className="bg-yellow p-2 rounded-[5px]">
         <Image
           aria-hidden
-          src="/car.svg"
+          src="/images/car.svg"
           alt="car icon"
           width={16}
           height={16}

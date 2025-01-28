@@ -16,7 +16,7 @@ const LicensePlate: React.FC = () => {
         <div className="border-r-2 border-black flex-col bg-[#1D48E1] h-full px-4 mr-auto">
           <Image
             aria-hidden
-            src="/flag.png"
+            src="/images/flag.png"
             alt="flag"
             width={30}
             height={20}

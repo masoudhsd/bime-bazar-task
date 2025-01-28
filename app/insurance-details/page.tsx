@@ -1,16 +1,16 @@
 "use client";
 
 import React, { memo, useEffect, useCallback, useMemo } from "react";
-import ConfirmButton from "@/components/Abstractions/ConfirmButton";
-import Header from "@/components/UI/Header";
-import LicensePlate from "@/components/UI/LicensePlate";
+import ConfirmButton from "@/components/abstractions/ConfirmButton";
+import Header from "@/components/ui/Header";
+import LicensePlate from "@/components/ui/LicensePlate";
 import useQueryParams from "@/hooks/useQueryParams";
 import { useGlobalState } from "@/context/InsuranceDetailsContext";
 import useFetchAddresses from "@/app/insurance-details/hooks/useFetchAddresses";
 import usePostInsuranceData from "@/app/insurance-details/hooks/usePostInsuranceData";
-import FormElements from "@/app/insurance-details/components/UI/FormElements";
-import InsuranceDetails from "@/app/insurance-details/components/UI/InsuranceDetails";
-import BottomSheetsOfHome from "./components/BottomSheets/BottomSheetsOfHome";
+import FormElements from "@/app/insurance-details/components/ui/FormElements";
+import InsuranceDetails from "@/app/insurance-details/components/ui/InsuranceDetails";
+import BottomSheetsOfHome from "./components/bottomSheets/BottomSheetsOfHome";
 
 function InsuranceDetailsPage() {
   const { state, dispatch } = useGlobalState();

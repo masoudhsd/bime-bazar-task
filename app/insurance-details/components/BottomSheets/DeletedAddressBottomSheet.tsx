@@ -1,6 +1,7 @@
 import React from "react";
-import ConfirmButton from "../../Abstractions/ConfirmButton";
+
 import { DeletedAddressBottomSheetProps } from "@/constants/types";
+import ConfirmButton from "@/components/abstractions/ConfirmButton";
 
 function DeletedAddressBottomSheet({
   deletedAddress,
@@ -25,7 +26,7 @@ function DeletedAddressBottomSheet({
       <p className="font-semibold text-start my-2">
         آیا از حذف آدرس خود، مطمین هستید؟
       </p>
-      <div className="bg-gray-200 p-4">
+      <div className="bg-gray-200 p-4 my-4">
         <div className="flex justify-start">
           <p className="text-black font-semibold">{deletedAddress?.name}</p>
         </div>

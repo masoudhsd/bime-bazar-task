@@ -62,17 +62,16 @@ export default function BottomSheet({
         >
           {title ? (
             <div className="flex justify-between items-center p-4 border-b-[1px] border-gray-200">
+              <p className="font-semibold">{title}</p>
               <Image
                 aria-hidden
-                src="/close.svg"
+                src="/images/close.svg"
                 alt="close icon"
                 width={14}
                 height={14}
                 onClick={onClose}
                 className="cursor-pointer"
               />
-
-              <p className="font-semibold">{title}</p>
             </div>
           ) : null}
           <div style={{ padding: "1rem" }}>{children}</div>

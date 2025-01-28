@@ -2,18 +2,17 @@
 
 import React, { memo, useCallback } from "react";
 import dynamic from "next/dynamic";
-import ConfirmButton from "../../Abstractions/ConfirmButton";
+
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DeletedAddressBottomSheet from "./DeletedAddressBottomSheet";
 import { BottomSheetsOfHomeProps } from "@/constants/types";
+import ConfirmButton from "@/components/abstractions/ConfirmButton";
 
 const DynamicBottomSheet = dynamic(
-  () => import("@/components/Abstractions/BottomSheet")
+  () => import("@/components/abstractions/BottomSheet")
 );
-const DynamicAdresses = dynamic(
-  () => import("@/components/UI/BottomSheets/AdressesBottomSheet")
-);
+const DynamicAdresses = dynamic(() => import("./AdressesBottomSheet"));
 
 function BottomSheetsOfHome({
   addresses,
