@@ -1,4 +1,4 @@
-import { GlobalStateProvider } from "@/context/GlobalStateProvider";
+import { InsuranceDetailsContext } from "@/context/InsuranceDetailsContext";
 import React from "react";
 
 function layout({
@@ -6,7 +6,7 @@ function layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <GlobalStateProvider>{children}</GlobalStateProvider>;
+  return <InsuranceDetailsContext>{children}</InsuranceDetailsContext>;
 }
 
 export default layout;

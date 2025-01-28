@@ -2,7 +2,7 @@
 
 import ConfirmButton from "@/components/Abstractions/ConfirmButton";
 import Header from "@/components/UI/Header";
-import InsuranceDetails from "@/components/UI/HomePage/InsuranceDetails";
+import InsuranceDetails from "@/app/insurance-details/components/UI/InsuranceDetails";
 import LicensePlate from "@/components/UI/LicensePlate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
