@@ -4,9 +4,10 @@ import ConfirmButton from "@/components/ConfirmButton";
 import Header from "@/components/Header";
 import LicensePlate from "@/components/LicensePlate";
 import { BASE_URL } from "@/constants/urls";
+import useFormReducer from "@/hooks/useFormReducer";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer, ChangeEvent, Reducer } from "react";
 
 const DynamicBottomSheet = dynamic(() => import("@/components/BottomSheet"));
 const DynamicAdresses = dynamic(() => import("@/components/Adresses"));
@@ -28,12 +29,14 @@ export default function Home() {
   const [selectedAddress, setSelectedAddress] = useState<Address>(null);
   const [deletedAddress, setDeleteAddress] = useState(null);
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { initialState, inputReducer } = useFormReducer();
+  const [state, dispatch] = useReducer(inputReducer, initialState);
+  const { nationalCode, nationalCodeError, phoneNumber, phoneNumberError } =
+    state;
 
   useEffect(() => {
     const fetchAddresses = async () => {
-      setLoading(true);
+      // setLoading(true);
       try {
         const response = await fetch(BASE_URL + "/my-addresses/");
         if (!response.ok) {
@@ -42,14 +45,32 @@ export default function Home() {
         const data = await response.json();
         setAddresses(data);
       } catch (err: any) {
-        setError(err.message || "An error occurred.");
+        // setError(err.message || "An error occurred.");
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
 
     fetchAddresses();
   }, []);
+
+  const handleConfirm = () => {
+    // Validate both fields on confirm
+    dispatch({ type: "VALIDATE_NATIONAL_CODE" });
+    dispatch({ type: "VALIDATE_PHONE_NUMBER" });
+
+    // If you want to proceed only if there are no errors:
+    if (!nationalCodeError && !phoneNumberError) {
+      console.log("No validation errors – can proceed to next step.");
+      // e.g., router.push("/next-page");
+    }
+  };
+
+  const isAllowedToSubmit =
+    !nationalCodeError &&
+    !phoneNumberError &&
+    phoneNumber.length !== 0 &&
+    nationalCode.length !== 0;
 
   return (
     <div
@@ -80,16 +101,36 @@ export default function Home() {
         اطلاعات شخصی مالک خودرو را وارد کنید:
       </p>
       <div className="flex flex-col w-full px-8">
+        {/* National Code Input */}
         <input
-          type="number"
+          type="text"
           placeholder="کد ملی"
-          className="border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium"
+          className={`border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium ${
+            nationalCodeError ? "border-red-500" : ""
+          }`}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            dispatch({ type: "SET_NATIONAL_CODE", payload: e.target.value })
+          }
+          value={nationalCode}
         />
+        {nationalCodeError && (
+          <span className="text-red-500 text-sm">{nationalCodeError}</span>
+        )}
+
         <input
-          type="number"
+          type="text"
           placeholder="شماره تلفن همراه"
-          className="border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium"
+          className={`border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium ${
+            phoneNumberError ? "border-red-500" : ""
+          }`}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            dispatch({ type: "SET_PHONE_NUMBER", payload: e.target.value })
+          }
+          value={phoneNumber}
         />
+        {phoneNumberError && (
+          <span className="text-red-500 text-sm">{phoneNumberError}</span>
+        )}
       </div>
       <p className="font-bold mr-auto pr-8 my-2">آدرس جهت درج روی بیمه‌نامه</p>
       <p className="text-sm mr-auto my-2 px-4 sm:px-0 pr-8">
@@ -106,9 +147,9 @@ export default function Home() {
       <div className="">
         <ConfirmButton
           text="تایید و ادامه"
-          onClick={() => console.log("h")}
-          textColor="[#DAD8D8]"
-          bgColor="[#858484]"
+          onClick={handleConfirm}
+          textColor={isAllowedToSubmit ? "text-white" : "text-[#DAD8D8]"}
+          bgColor={isAllowedToSubmit ? "bg-black" : "bg-gray-400"}
           isLoading={false}
           classes="my-4 mr-auto"
         />

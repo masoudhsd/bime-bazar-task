@@ -1,7 +1,7 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
-import { useState } from "react";
 import ConfirmButton from "./ConfirmButton";
 
 interface Address {
@@ -107,4 +107,4 @@ function Addresses({
   ));
 }
 
-export default Addresses;
+export default React.memo(Addresses);
