@@ -41,11 +41,10 @@ function usePostInsuranceData() {
       if (err instanceof Error) {
         openSheet("order-submit-error", "open");
         dispatch({ type: "IS_SUBMIT_ORDER_LOADING", payload: false });
-        console.log(String(err));
+        alert(err.message);
       }
     } finally {
       dispatch({ type: "IS_SUBMIT_ORDER_LOADING", payload: false });
-      router.push("/insurance-details/success");
     }
   };
   return { postInsuranceFormData };

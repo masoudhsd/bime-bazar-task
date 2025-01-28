@@ -122,7 +122,7 @@ function BottomSheetsOfHome({
             textColor="text-black"
             bgColor="bg-white"
             isLoading={false}
-            classes="w-full mx-1 my-2 outline-auto"
+            classes="w-full mx-1 my-2 outline outline-black outline-solid"
             onClick={() => router.back()}
           />
         </div>
