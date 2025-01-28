@@ -6,7 +6,7 @@ function Home() {
   const router = useRouter();
   useEffect(() => {
     router.push("insurance-details");
-  }, []);
+  }, [router]);
   return null;
 }
 

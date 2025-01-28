@@ -25,7 +25,7 @@ function FormElements({
 }: InputsProps) {
   return (
     <>
-      <p className="font-bold mr-auto pr-4">
+      <p className="font-bold ml-auto pr-4">
         اطلاعات شخصی مالک خودرو را وارد کنید:
       </p>
       <div className="flex flex-col w-full px-4">
@@ -59,10 +59,10 @@ function FormElements({
         )}
       </div>
 
-      <p className="font-bold mr-auto pr-4 my-2">آدرس جهت درج روی بیمه‌نامه</p>
+      <p className="font-bold ml-auto pr-4 mt-2">آدرس جهت درج روی بیمه‌نامه</p>
 
       <p
-        className={`text-sm mr-auto my-2 pr-4  ${
+        className={`text-sm ml-auto my-2 pr-4  ${
           addressError ? "text-red-600" : ""
         }`}
       >
