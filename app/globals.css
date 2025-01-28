@@ -24,3 +24,13 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+* {
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+body {
+  width: 460;
+  margin: auto;
+}

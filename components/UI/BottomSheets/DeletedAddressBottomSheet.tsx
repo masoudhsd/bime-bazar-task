@@ -1,5 +1,5 @@
 import React from "react";
-import ConfirmButton from "../../ConfirmButton";
+import ConfirmButton from "../../Abstractions/ConfirmButton";
 import { DeletedAddressBottomSheetProps } from "@/constants/types";
 
 function DeletedAddressBottomSheet({

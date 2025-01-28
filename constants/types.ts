@@ -33,7 +33,7 @@ export interface BottomSheetsOfHomeProps {
   deletedAddress: Address | null;
   selectedAddress: Address | null;
   dispatch: React.Dispatch<Action>;
-  handlePostFormData: () => void;
+  postInsuranceFormData: () => void;
   openSheet: (param: string, value: string) => void;
   isSubmitOrderLoading: boolean;
 }

@@ -38,7 +38,7 @@ function AddressesBottomSheet({
           key={address?.id}
           className="w-full flex flex-col justify-center my-6"
         >
-          <div className="flex justify-end">
+          <div className="flex justify-center flex-row-reverse">
             <Image
               aria-hidden
               src="/delete.svg"
@@ -58,7 +58,7 @@ function AddressesBottomSheet({
               className="cursor-pointer"
             />
           </div>
-          <p className="text-xs text-end mt-2">{address?.details}</p>
+          <p className="text-xs text-start mt-2 ">{address?.details}</p>
         </div>
       ))}
     </>

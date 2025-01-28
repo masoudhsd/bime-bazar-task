@@ -2,9 +2,10 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Portal from "./Portal";
+
 import { BottomSheetProps } from "@/constants/types";
 import Image from "next/image";
+import Portal from "./Portal";
 
 export default function BottomSheet({
   paramKey = "bs",

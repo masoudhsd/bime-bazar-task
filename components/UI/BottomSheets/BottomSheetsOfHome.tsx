@@ -2,13 +2,15 @@
 
 import React, { memo, useCallback } from "react";
 import dynamic from "next/dynamic";
-import ConfirmButton from "../../ConfirmButton";
+import ConfirmButton from "../../Abstractions/ConfirmButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DeletedAddressBottomSheet from "./DeletedAddressBottomSheet";
 import { BottomSheetsOfHomeProps } from "@/constants/types";
 
-const DynamicBottomSheet = dynamic(() => import("@/components/BottomSheet"));
+const DynamicBottomSheet = dynamic(
+  () => import("@/components/Abstractions/BottomSheet")
+);
 const DynamicAdresses = dynamic(
   () => import("@/components/UI/BottomSheets/AdressesBottomSheet")
 );
@@ -19,7 +21,7 @@ function BottomSheetsOfHome({
   isSubmitOrderLoading,
   dispatch,
   selectedAddress,
-  handlePostFormData,
+  postInsuranceFormData,
   openSheet,
 }: BottomSheetsOfHomeProps) {
   const router = useRouter();
@@ -106,10 +108,16 @@ function BottomSheetsOfHome({
         paramKey="order-submit-error"
         paramValue="open"
       >
-        <p className="font-bold mb-2 text-end">
+        <p className="font-bold mb-2 text-start">
           متاسفانه در ثبت اطلاعات شما، خطایی رخ داده است
         </p>
         <div className="flex">
+          <ConfirmButton
+            text="تلاش مجدد"
+            classes="w-full mx-1 my-2 bg-black text-white"
+            onClick={postInsuranceFormData}
+            isLoading={isSubmitOrderLoading}
+          />
           <ConfirmButton
             text="بازگشت"
             textColor="text-black"
@@ -118,15 +126,8 @@ function BottomSheetsOfHome({
             classes="w-full mx-1 my-2 outline-auto"
             onClick={() => router.back()}
           />
-          <ConfirmButton
-            text="تلاش مجدد"
-            classes="w-full mx-1 my-2 bg-black text-white"
-            onClick={handlePostFormData}
-            isLoading={isSubmitOrderLoading}
-          />
         </div>
       </DynamicBottomSheet>
-      <button onClick={() => router.push("/success")}>ss</button>
     </div>
   );
 }

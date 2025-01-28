@@ -22,6 +22,8 @@ export default function ConfirmButton({
         } p-4 font-semibold w-full flex justify-center`}
         onClick={onClick}
       >
+        <p className={`${textColor}`}>{text}</p>
+
         {isLoading && (
           <div role="status">
             <svg
@@ -40,10 +42,9 @@ export default function ConfirmButton({
                 fill="currentFill"
               />
             </svg>
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only"></span>
           </div>
         )}
-        <p className={`${textColor}`}>{text}</p>
       </button>
     </div>
   );
