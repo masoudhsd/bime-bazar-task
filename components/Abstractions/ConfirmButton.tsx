@@ -18,7 +18,7 @@ export default function ConfirmButton({
     <div className={`${classes}`}>
       <button
         className={`${
-          isLoading ? "bg-gray-400" : bgColor
+          isLoading ? "bg-buttonBgGray" : bgColor
         } p-4 font-semibold w-full flex justify-center`}
         onClick={onClick}
       >
@@ -28,7 +28,7 @@ export default function ConfirmButton({
           <div role="status">
             <svg
               aria-hidden="true"
-              className="w-6 h-6 mr-4 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
+              className="w-6 h-6 mr-4 text-subTextGray animate-spin dark:text-subTextGray fill-gray-600"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

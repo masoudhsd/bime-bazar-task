@@ -117,8 +117,8 @@ function InsuranceDetailsPage() {
         <ConfirmButton
           text="تایید و ادامه"
           onClick={handleConfirmForm}
-          textColor={isAllowedToSubmit ? "text-white" : "text-[#DAD8D8]"}
-          bgColor={isAllowedToSubmit ? "bg-black" : "bg-gray-400"}
+          textColor={isAllowedToSubmit ? "text-white" : "text-buttonTextGray"}
+          bgColor={isAllowedToSubmit ? "bg-black" : "bg-buttonBgGray"}
           classes="my-4"
         />
       </div>

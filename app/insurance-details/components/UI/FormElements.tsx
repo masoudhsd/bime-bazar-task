@@ -33,7 +33,7 @@ function FormElements({
           type="tel"
           placeholder="کد ملی"
           className={`border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium ${
-            nationalCodeError ? "border-red-600" : ""
+            nationalCodeError ? "border-error" : ""
           }`}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             dispatch({ type: "SET_NATIONAL_CODE", payload: e.target.value })
@@ -41,13 +41,13 @@ function FormElements({
           value={nationalCode}
         />
         {nationalCodeError && (
-          <span className="text-red-600 text-sm">{nationalCodeError}</span>
+          <span className="text-error text-sm">{nationalCodeError}</span>
         )}
         <input
           type="tel"
           placeholder="شماره تلفن همراه"
           className={`border-[1px] border-gray-400 p-2 my-2 h-12 text-[#757575] font-medium ${
-            phoneNumberError ? "border-red-600" : ""
+            phoneNumberError ? "border-error" : ""
           }`}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             dispatch({ type: "SET_PHONE_NUMBER", payload: e.target.value })
@@ -55,15 +55,15 @@ function FormElements({
           value={phoneNumber}
         />
         {phoneNumberError && (
-          <span className="text-red-600 text-sm">{phoneNumberError}</span>
+          <span className="text-error text-sm">{phoneNumberError}</span>
         )}
       </div>
 
       <p className="font-bold ml-auto pr-4 mt-2">آدرس جهت درج روی بیمه‌نامه</p>
 
       <p
-        className={`text-sm ml-auto my-2 pr-4  ${
-          addressError ? "text-red-600" : ""
+        className={`text-sm ml-auto my-2 pr-4 text-subTextGray ${
+          addressError ? "text-error" : ""
         }`}
       >
         {selectedAddress

@@ -26,11 +26,13 @@ function DeletedAddressBottomSheet({
       <p className="font-semibold text-start my-2">
         آیا از حذف آدرس خود، مطمین هستید؟
       </p>
-      <div className="bg-gray-200 p-4 my-4">
+      <div className="bg-paperBgGray p-4 my-4">
         <div className="flex justify-start">
           <p className="text-black font-semibold">{deletedAddress?.name}</p>
         </div>
-        <p className="text-sm text-start">{deletedAddress?.details}</p>
+        <p className="text-sm text-start text-subTextGray mt-4">
+          {deletedAddress?.details}
+        </p>
       </div>
       <div className="flex">
         <ConfirmButton

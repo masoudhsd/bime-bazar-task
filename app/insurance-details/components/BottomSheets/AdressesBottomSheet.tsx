@@ -58,7 +58,9 @@ function AddressesBottomSheet({
               className="cursor-pointer"
             />
           </div>
-          <p className="text-xs text-start mt-2 ">{address?.details}</p>
+          <p className="text-xs text-start mt-2 text-subTextGray">
+            {address?.details}
+          </p>
         </div>
       ))}
     </>

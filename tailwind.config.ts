@@ -13,6 +13,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         yellow: "#FFC453",
+        subTextGray: "#757575",
+        buttonTextGray: "#858484",
+        buttonBgGray: "#DAD8D8",
+        paperBgGray: "#F2F2F2",
+        error: "#E61F10",
       },
       fontFamily: {
         sans: ["var(--font-vazirmatn)", ...fontFamily.sans],

@@ -77,7 +77,7 @@ function BottomSheetsOfHome({
           className={`${
             selectedAddress
               ? "bg-black text-white"
-              : "bg-gray-200 text-gray-500"
+              : "bg-buttonBgGray text-buttonTextGray"
           } p-4 font-semibold w-full mt-4`}
           onClick={handleClickChooseAddress}
         >
