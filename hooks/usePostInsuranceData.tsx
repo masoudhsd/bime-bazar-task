@@ -36,7 +36,7 @@ function usePostInsuranceData() {
       }
       dispatch({ type: "IS_SUBMIT_ORDER_LOADING", payload: true });
 
-      router.push("/success");
+      router.push("/insurance-details/success");
     } catch (err: unknown) {
       if (err instanceof Error) {
         openSheet("order-submit-error", "open");
@@ -45,7 +45,7 @@ function usePostInsuranceData() {
       }
     } finally {
       dispatch({ type: "IS_SUBMIT_ORDER_LOADING", payload: false });
-      router.push("/success");
+      router.push("/insurance-details/success");
     }
   };
   return { postInsuranceFormData };

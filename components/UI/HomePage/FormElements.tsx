@@ -62,7 +62,7 @@ function FormElements({
       <p className="font-bold mr-auto pr-4 my-2">آدرس جهت درج روی بیمه‌نامه</p>
 
       <p
-        className={`text-sm mr-auto my-2 px-4 sm:px-0 ${
+        className={`text-sm mr-auto my-2 pr-4  ${
           addressError ? "text-red-600" : ""
         }`}
       >

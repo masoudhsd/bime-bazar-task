@@ -41,7 +41,7 @@ function BottomSheetsOfHome({
   );
 
   const handleSheet1Close = useCallback(() => {
-    router.push("/");
+    router.push("/insurance-details");
     dispatch({ type: "SET_SELECTED_ADDRESS", payload: null });
   }, [dispatch, router]);
 
@@ -55,7 +55,7 @@ function BottomSheetsOfHome({
 
   const handleClickChooseAddress = useCallback(() => {
     if (!selectedAddress) return;
-    router.push("/");
+    router.push("/insurance-details");
   }, [router, selectedAddress]);
 
   return (

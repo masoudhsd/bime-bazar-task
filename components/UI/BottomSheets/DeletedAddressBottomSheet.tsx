@@ -22,16 +22,24 @@ function DeletedAddressBottomSheet({
   }
   return (
     <div>
-      <p className="font-semibold text-end my-2">
+      <p className="font-semibold text-start my-2">
         آیا از حذف آدرس خود، مطمین هستید؟
       </p>
       <div className="bg-gray-200 p-4">
-        <div className="flex justify-end">
+        <div className="flex justify-start">
           <p className="text-black font-semibold">{deletedAddress?.name}</p>
         </div>
-        <p className="text-sm text-end">{deletedAddress?.details}</p>
+        <p className="text-sm text-start">{deletedAddress?.details}</p>
       </div>
       <div className="flex">
+        <ConfirmButton
+          text="تایید"
+          onClick={handleDelete}
+          textColor="text-white"
+          bgColor="bg-black"
+          isLoading={false}
+          classes="w-full mx-1 my-2"
+        />
         <ConfirmButton
           text="بازگشت"
           onClick={() => {
@@ -40,15 +48,7 @@ function DeletedAddressBottomSheet({
           textColor="text-black"
           bgColor="bg-white"
           isLoading={false}
-          classes="w-full mx-1 my-2 outline-solid"
-        />
-        <ConfirmButton
-          text="تایید"
-          onClick={handleDelete}
-          textColor="text-white"
-          bgColor="bg-black"
-          isLoading={false}
-          classes="w-full mx-1 my-2"
+          classes="w-full mx-1 my-2 outline outline-black outline-solid"
         />
       </div>
     </div>

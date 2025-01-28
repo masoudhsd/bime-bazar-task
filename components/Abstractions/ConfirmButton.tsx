@@ -15,7 +15,7 @@ export default function ConfirmButton({
   classes,
 }: ButtonProps) {
   return (
-    <div className={`${classes} `}>
+    <div className={`${classes}`}>
       <button
         className={`${
           isLoading ? "bg-gray-400" : bgColor

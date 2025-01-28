@@ -61,7 +61,7 @@ function useFormReducer() {
         if (state.nationalCode.length !== 10) {
           return {
             ...state,
-            nationalCodeError: "کد ملی باید دقیقا 10 رقم باشد.",
+            nationalCodeError: "کد ملی باید 10 رقم باشد.",
           };
         }
 
@@ -83,7 +83,7 @@ function useFormReducer() {
         if (state.phoneNumber.trim().length === 0) {
           return {
             ...state,
-            phoneNumberError: "شماره تلفن همراه باید ۱۰ رقم باشد.",
+            phoneNumberError: "شماره تلفن همراه نمی‌تواند خالی باشد.",
           };
         }
 
