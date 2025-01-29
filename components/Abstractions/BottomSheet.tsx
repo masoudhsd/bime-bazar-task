@@ -31,6 +31,7 @@ export default function BottomSheet({
           zIndex: 9999,
           pointerEvents: isOpen ? "auto" : "none",
           margin: "0 auto",
+          maxWidth: 460,
         }}
       >
         {/* Backdrop */}
